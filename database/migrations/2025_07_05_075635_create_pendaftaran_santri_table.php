@@ -1,0 +1,33 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('pendaftaran_santri', function (Blueprint $table) {
+            $table->id();
+            $table->string('nama');
+            $table->string('nis')->unique();
+            $table->unsignedBigInteger('orang_tua_id');
+            $table->enum('status', ['pending', 'diterima', 'ditolak'])->default('pending');
+            $table->timestamps();
+
+            $table->foreign('orang_tua_id')->references('id')->on('orang_tua');
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('pendaftaransantri');
+    }
+};
