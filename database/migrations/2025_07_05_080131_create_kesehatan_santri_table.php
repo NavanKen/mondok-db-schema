@@ -19,10 +19,11 @@ return new class () extends Migration {
             $table->text('obat')->nullable();
             $table->string('lokasi_rawat')->nullable();
             $table->date('tgl_selesai')->nullable();
+            $table->string('prioritas')->default('Rendah');
             $table->text('catatan')->nullable();
             $table->string('status')->default('draft');
-            $table->unsignedBigInteger('musyrif_id');
             $table->string('diperiksa_oleh');
+            $table->unsignedBigInteger('musyrif_id');
             $table->timestamps();
 
             $table->foreign('santri_id')->references('id')->on('santri');
